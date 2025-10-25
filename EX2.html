@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>EX2</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="Increment">++</button>
+        <span>{{compteur}}</span>
+          <button @click="Desincrement">--</button>
+    </div>
+<script>
+  const app = Vue.createApp({
+    data() {
+      return {
+        compteur:0
+      }
+    },
+    methods:{
+      Increment(){
+        this.compteur++;
+      },
+      Desincrement(){
+        this.compteur--;
+      }
+  }})
+
+ app.mount('#app')
+
+</script>
+<style>
+     div{
+        margin-top:220px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap:20px;
+        font-size: 25px;;
+    }
+    button{
+        width: 80px;
+         font-size: 23px;;
+    }
+</style>
+</body>
+</html>
