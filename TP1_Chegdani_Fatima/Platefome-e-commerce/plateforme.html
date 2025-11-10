@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>Les Bonnes Pièces</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <img src="images\pieces sans background.jpg" alt="LOGO" width="100">
+      <h1>Les Bonnes Pièces</h1>
+    </header>
+
+    <main>
+      <div id="app">
+        <!-- Champ de recherche et bouton liste -->
+        <div class="inputlist">
+          <input
+            type="text"
+            v-model="recherche"
+            placeholder="Recherchez une pièce..."
+            class="search"
+          >
+            <input
+            type="text"
+            v-model="rechercheparprix"
+            placeholder="Filtrez par prix ..."
+            class="search"
+          >
+
+          <!-- Bouton Liste -->
+          <button type="button" class="btn-liste" @click="ouvrirListe">
+            <i class="fas fa-list"></i> 
+          </button>
+        </div>
+
+        <!-- Popup Panier -->
+        <div v-if="showPopup" class="popup">
+          <div class="popup-content">
+            <h3>🛒 Panier :</h3>
+            <ul>
+              <li v-for="item in panier" :key="item.id" class="panier-item">
+                <img :src="item.image" alt="Image" width="50" height="50">
+                <strong>{{ item.nom }}</strong>
+                <div class="compteur-controls">
+                  <button class="additem" @click="additem(item)">+</button>
+                  <span>{{ item.compteur }}</span>
+                  <button class="desinrementitem" @click="desinrementitem(item)">-</button>
+                </div>
+                <strong>{{ item.prix1 }} DH</strong>
+              </li>
+            </ul>
+            <button @click="fermerPopup">Fermer</button>
+          </div>
+        </div>
+
+        <!-- Filtres -->
+        <section class="filtres">
+          <div class="filter-wrapper">
+            <i class="fa-solid fa-filter"></i>
+            <select v-model="filter" class="selectcat">
+              <option value="">-- Filtrez par catégorie ou disponibilité --</option>
+              <option value="Électricité">Électricité</option>
+              <option value="Filtration">Filtration</option>
+              <option value="Moteur">Moteur</option>
+              <option value="Freinage">Freinage</option>
+              <option value="Refroidissement">Refroidissement</option>
+              <option value="Suspension">Suspension</option>
+              <option value="Sécurité">Sécurité</option>
+              <option value="Transmission">Transmission</option>
+              <option value="Carburant">Carburant</option>
+              <option value="Carrosserie">Carrosserie</option>
+              <option value="Échappement">Échappement</option>
+              <option value="Direction">Direction</option>
+              <option value="True">Disponible</option>
+              <option value="False">Non Disponible</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- Liste des produits -->
+        <h3>Liste des produits :</h3>
+        <section class="fiches">
+          <div v-for="piece in piecesFiltrees" :key="piece.id" class="piece">
+            <strong>{{ piece.nom }}</strong><br>
+            <img 
+              :src="piece.image" 
+              alt="Image de la pièce" 
+              width="150" 
+              height="150" 
+              style="border-radius: 8px; margin-top: 10px;"
+            ><br>
+            <strong>{{ piece.categorie }}</strong><br>
+            <span v-if="piece.disponible" style="color: green;">Disponible</span>
+            <span v-else style="color: red;">Non disponible</span><br>
+
+            <div class="prix-panier">
+              <strong>{{ piece.prix }} DH</strong>
+              <i 
+                @click="AddPanier(piece)" 
+                class="fas fa-cart-plus add-icon" 
+                title="Ajouter au panier"
+              ></i>
+            </div>
+          </div>
+        </section>
+
+        <!-- Message de validation -->
+        <div v-if="showValider" class="toastValider">
+          ✅ Votre pièce a été ajoutée au panier avec succès !
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            recherche: '',
+            rechercheparprix: '',
+            filter: '',
+            showValider: false,
+            showPopup: false,
+            panier: [],
+            pieces: [
+              { id: 1, nom: "Batterie 12V", prix: 120, categorie: "Électricité", disponible: true, image: "images/batterie.jpg" },
+              { id: 2, nom: "Filtre à huile", prix: 15, categorie: "Filtration", disponible: true, image: "images/Filtre à huile.jpg" },
+              { id: 3, nom: "Bougies d'allumage (x4)", prix: 35, categorie: "Moteur", disponible: true, image: "images/Bougies d'allumage (x4).jpg" },
+              { id: 4, nom: "Disques de frein (x2)", prix: 80, categorie: "Freinage", disponible: false, image: "images/Disques de frein (x2).jpg" },
+              { id: 5, nom: "Courroie de distribution", prix: 90, categorie: "Moteur", disponible: true, image: "images/Courroie de distribution.jpg" },
+              { id: 6, nom: "Pompe à eau", prix: 70, categorie: "Refroidissement", disponible: true, image: "images/Pompe à eau.jpg" },
+              { id: 7, nom: "Amortisseurs arrière (x2)", prix: 150, categorie: "Suspension", disponible: false, image: "images/téléchargement (13).jpg" },
+              { id: 8, nom: "Filtre à air", prix: 20, categorie: "Filtration", disponible: true, image: "images/Filtre à air.jpg" },
+              { id: 9, nom: "Capteur ABS", prix: 50, categorie: "Sécurité", disponible: true, image: "images/Capteur ABS.jpg" },
+              { id: 10, nom: "Radiateur", prix: 130, categorie: "Refroidissement", disponible: false, image: "images/Radiateur.jpg" },
+              { id: 11, nom: "Alternateur", prix: 200, categorie: "Électricité", disponible: true, image: "images/Alternateur.jpg" },
+              { id: 12, nom: "Démarreur", prix: 180, categorie: "Électricité", disponible: true, image: "images/Démarreur.jpg" }
+            ]
+          };
+        },
+
+        computed: {
+           piecesFiltrees() {
+             return this.pieces.filter(piece => {
+             const nomMatch = piece.nom.toLowerCase().includes(this.recherche.toLowerCase());
+             //parseFloat() transforme une chaîne en nombre (ex. "100" → 100)
+              const prixMatch = !this.rechercheparprix || parseFloat(piece.prix) <= parseFloat(this.rechercheparprix);
+
+             if (!this.filter) return nomMatch && prixMatch;
+             if (piece.categorie.toLowerCase() === this.filter.toLowerCase() && nomMatch && prixMatch) return true;
+             if (this.filter === "True" && piece.disponible && nomMatch && prixMatch) return true;
+             if (this.filter === "False" && !piece.disponible && nomMatch && prixMatch) return true;
+             return false;
+  });
+          },
+
+        },
+
+        methods: {
+          AddPanier(piece) {
+            const item = this.panier.find(p => p.id === piece.id);
+            if (item) {
+              item.compteur++;
+              item.prix1 = item.prix * item.compteur;
+            } else {
+              this.panier.push({ ...piece, compteur: 1, prix1: piece.prix });
+            }
+
+            this.showValider = true;
+            setTimeout(() => (this.showValider = false), 3000);
+          },
+
+          ouvrirListe() {
+            this.showPopup = true;
+          },
+
+          fermerPopup() {
+            this.showPopup = false;
+          },
+
+          additem(item) {
+            item.compteur++;
+            item.prix1 = item.prix * item.compteur;
+          },
+
+          desinrementitem(item) {
+            if (item.compteur > 1) {
+              item.compteur--;
+              item.prix1 = item.prix * item.compteur;
+            } else {
+              this.panier = this.panier.filter(p => p.id !== item.id);
+            }
+          }
+        }
+      });
+
+      app.mount('#app');
+    </script>
+  </body>
+</html>

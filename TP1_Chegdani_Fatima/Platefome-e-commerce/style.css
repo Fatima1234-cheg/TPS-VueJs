@@ -1,0 +1,404 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+	max-width: 1200px;
+	margin: auto;
+	padding: 16px;
+	font-family: 'Montserrat', sans-serif;
+}
+header {
+	display: flex;
+	align-items: center; /* Correction : aligne verticalement */
+	justify-content: space-between; /* Correction : meilleure répartition */
+	margin-bottom: 16px;
+	padding: 16px; /* Augmenté pour plus d'espace */
+	border: 1px solid rgb(220, 220, 220);
+	background-color: #ffffff;
+	border-radius: 10px;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	gap: 10px; /* Espace entre les éléments */
+}
+
+header img {
+	height: 40px;
+  width: 40px;
+	border-radius: 5px;
+  padding-right:8px
+	/* margin-left retiré car géré par le gap */
+}
+.logotitre {
+  display: flex;          /* Active le mode flex pour les enfants */
+  align-items: center;    /* Aligne verticalement l'image et le texte */
+  gap: 10px;              /* Espace entre l'image et le texte */
+}
+
+.logopiece {
+  font-size: 23px;        /* Taille du texte */
+  font-weight: bold;      /* Met le texte en gras */
+}
+
+
+/* Le reste de votre CSS reste inchangé */
+.search {
+  height: 40px;
+  padding: 0 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  width:80%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+transform: scale(1.001);
+  box-shadow: 0 4px 0.5px rgba(81, 97, 84, 0.4);
+}
+.inputlist{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+  gap:10px;
+   
+}
+
+.icon-list{
+	margin-top: 0px;
+	height:40px;
+	width: 80px;
+}
+
+.filtres {
+  margin-top: 20px;
+  width: 98%; /* largeur totale de la section */
+  padding: 10px;
+  height: 40px;
+  border-radius: 8px;
+  box-shadow: 1px 2px 3px 1px #8bae8c;
+  border: 1px solid #2f3542;
+}
+
+.filter-wrapper {
+  display: flex;
+  align-items: center; /* centre verticalement l'icône et le select */
+  gap: 16px; /* espace entre icône et select */
+}
+
+.selectcat {
+  flex: 1; /* prend toute la largeur restante */
+  padding: 8px;
+  font-size: 18px;
+  font-family:'Times New Roman', Times, serif, Tahoma, Geneva, Verdana, sans-serif
+}
+.fa-filter{
+  font-size: 23px;
+}
+
+
+.btn-liste{
+	padding:3px;
+	margin-left: 10px;
+	background-color: rgb(0, 173, 26);
+	width: 170px;
+  color:#ffffff;
+	height:42px;
+	border: none;
+	border-radius: 25px;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	font-size: 19px;
+}
+
+.toastValider {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #02bd17;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+/* --- Popup (modale) --- */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 18px;
+}
+.titrepopup{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background-color: #ffffff;
+  padding: 7px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+
+
+.fiches {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 pièces par ligne */
+  gap: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  border:1px solid rgb(218, 217, 217);
+  border-radius: 10px;
+  justify-items: center;
+}
+
+.piece {
+	line-height: 30px;
+  width: 250px;
+  height: 300px;
+  background-color: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 1px  3px 8px rgba(0, 0, 0, 0.05);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.piece img {
+  width: 80%;
+  height: 150px;
+  margin-top: 10px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.piece:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.prix-panier{
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-between;
+	margin-left: auto;
+	margin-right: auto;
+	width: 200px;
+  gap:20px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.add-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8px;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  color: #00a600;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+
+/* Style de la liste du panier */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Chaque élément du panier */
+.panier-item {
+  display: flex;
+  align-items: center;
+  gap: 70px;
+  padding: 8px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Image du produit */
+.panier-item img {
+  border-radius: 8px;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+/* Texte des pièces */
+.panier-item strong { 
+  display: block;
+  font-size: 14px;
+  width: 150px;
+}
+
+/* Optionnel : hover pour surligner l'élément */
+.panier-item:hover {
+  background-color: #f5f5f5;
+}
+
+.additem{
+	width: 45px;
+	height: 40px;
+	font-size: 20px;
+	align-items: center;
+  margin-right: 20px;
+  background-color: #d5e6d5;
+  border-color: #004a02;
+  color: #2e7d32;
+  border: none;
+  border-radius: 2px;
+}
+
+.desinrementitem{
+	width: 45px;
+	height: 40px;
+	font-size: 20px;
+	align-items: center;
+  margin-left: 20px;
+   background-color: #d5e6d5;
+  border-color: #004a02;
+  color: #2e7d32;
+    border: none;
+  border-radius: 2px;
+}
+.iconfermer{
+   background-color: #ffffff;
+  border: none;
+  color: black;
+  font-size: 21px;
+  cursor: pointer;
+}
+.iconpaniertitre{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 20px;
+}
+.delete-icon {
+  color: rgb(105, 112, 106);
+  margin-right: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.delete-icon:hover {
+  transform: scale(1.2);
+}
+.btn-liste {
+  position: relative;
+  background: none;
+  border: none;
+  font-size: 21px;
+  cursor: pointer;
+  color: #333;
+  background-color: #00a600;
+  color:#ffffff;
+  width:170px
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -1px;
+  background-color:  #e5fbe4;
+  color: rgb(15, 100, 0);
+  border-radius: 50%;
+  font-size: 15px;
+  padding: 3px 7px;
+  font-weight: bold;
+  border: 1px solid black;
+}
+.menuderoulante{
+ 
+  width:400px;
+ 
+}
+.menuderoulante ul {
+display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.menuderoulante ul li  {
+  
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 20px;
+  text-decoration: underline #00a600;
+  
+}
+.menuderoulante ul li a {
+  list-style: none;
+  text-decoration: none;
+  color:#000810;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.pagination button {
+  background: linear-gradient(135deg, #28a745, #1d8348);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.pagination button:disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.pagination span {
+  color: #2f3542;
+  font-size: 16px;
+  background: #f8f9fa;
+  padding: 8px 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+ .titrelisteproduits{
+ padding-top: 10px;
+ font-size: 23px;
+ font-weight: bold;
+
+ padding: 10px;
+ text-decoration: underline #008404;
+ font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.listpieces{
+ 
+ margin-top: 15px;
+ text-align: center;
+}

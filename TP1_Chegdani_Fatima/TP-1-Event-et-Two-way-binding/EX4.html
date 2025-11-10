@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>EX4</title>
+</head>
+<body>
+     <div id="app">
+        <span>Coulour de la police :</span><br>
+        <label>Rouge</label><input type="radio" v-model="color" value="red"><br>
+          <label>Vert</label><input type="radio" v-model="color" value="green"><br>
+           <span>Afficher/cacher le paragraphe ?</span><input type="checkbox" @click="tooglep" >
+          <p v-show="showp" :style="{ color: color }">Vue.js est un framework JavaScript progressif qui facilite la création d’interfaces web  interactives et réactives
+             Grâce à son système de liaison bidirectionnelle (v-model), ses composants réutilisables et sa gestion efficace du DOM, 
+            Vue.js permet de développer des applications modernes de manière simple, structurée et performante.</p>
+         
+
+</div>
+
+
+<script>
+const app = Vue.createApp({
+  data() {
+    return {
+        color:"",
+        
+      showp:false
+    }
+  },
+  methods:{
+    tooglep(){
+        this.showp=!this.showp
+       
+        
+    }
+  }
+})
+
+app.mount('#app')
+</script>
+
+<style>
+     div{
+       
+        padding: 10px;
+        font-size: 25px;;
+        line-height: 40px;
+    }
+    span{
+        font-weight: bold;
+        font-size: 25px;
+        
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+   
+</style>
+
+</body>
+</html>
