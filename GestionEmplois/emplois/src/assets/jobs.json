@@ -1,0 +1,12 @@
+{
+  "jobs": [
+    {
+      "id": "0209",
+      "titre": "prof",
+      "description": "This project proposes an intelligent web platform, based on AI, to assist doctors in detecting and classifying breast cancer from ultrasound images. Using deep learning, it distinguishes benign from malignant masses by analyzing their shape and texture. Doctors can upload images, receive real-time diagnoses, send reports to patients, and access a comprehensive dashboard for tracking patient record",
+      "salaire": 2,
+      "dateCreation": "2025-11-22",
+      "anneeExperience": 22
+    }
+  ]
+}

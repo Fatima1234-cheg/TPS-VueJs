@@ -1,0 +1,92 @@
+/* Couleurs principales */
+:root {
+  --primary-blue: #007BFF;
+  --light-blue: #E6F0FF;
+  --dark-blue: #0056b3;
+  --text-color: #0d1b2a;
+}
+
+/* Global */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light-blue);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* Container général */
+div {
+  padding: 20px;
+}
+
+/* Titres */
+h2 {
+  color: var(--primary-blue);
+  margin-bottom: 20px;
+}
+
+/* Boutons */
+button {
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 5px;
+}
+
+button:hover {
+  background-color: var(--dark-blue);
+}
+
+/* Input barre de recherche */
+input[type="text"] {
+  padding: 8px 12px;
+  width: 100%;
+  max-width: 300px;
+  border: 2px solid var(--primary-blue);
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* Jobs list */
+div[v-for] {
+  background-color: white;
+  border: 1px solid var(--primary-blue);
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Popup JobDetail */
+.job-detail-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 2px solid var(--primary-blue);
+  border-radius: 8px;
+  padding: 20px;
+  z-index: 1000;
+  min-width: 300px;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 123, 255, 0.2);
+  z-index: 900;
+}
+
+/* Router-link button */
+.router-link button {
+  margin-bottom: 15px;
+}
