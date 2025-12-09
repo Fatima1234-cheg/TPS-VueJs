@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Conférence IA",
+    "description": "Présentation sur l'Intelligence Artificielle pour étudiants.",
+    "date": { "_seconds": 1765375200, "_nanoseconds": 0 },
+    "yes": 0,
+    "no": 0
+  },
+  {
+    "title": "Atelier Web",
+    "description": "Apprendre à créer des applications web modernes.",
+    "date": { "_seconds": 1765548000, "_nanoseconds": 0 },
+    "yes": 0,
+    "no": 0
+  },
+  {
+    "title": "Séminaire Blockchain",
+    "description": "Introduction à la blockchain et crypto-monnaies.",
+    "date": { "_seconds": 1765634400, "_nanoseconds": 0 },
+    "yes": 0,
+    "no": 0
+  }
+]
